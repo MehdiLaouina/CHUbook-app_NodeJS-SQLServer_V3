@@ -4,10 +4,11 @@ const express = require('express');
 const serviceControllers = require('../controllers/serviceControllers');
 const router = express.Router();
 
-const { addService } = serviceControllers;
+const { addService, getServiceByOrder } = serviceControllers;
 
 
 router.post('/service', addService);
+router.get('/serviceByOrder/:id', getServiceByOrder);
 
 
 

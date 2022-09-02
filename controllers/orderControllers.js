@@ -13,8 +13,8 @@ const getAllOrders = async (req, res, next) => {
 
 const getOrderByService = async (req, res, next) => {
     try {
-        const Id_S = req.params.id;
-        const orders_S = await orderData.getOrderByService(Id_S);
+        const libelle = req.params.libelle;
+        const orders_S = await orderData.getOrderByService(libelle);
         res.send(orders_S);
     } catch (error) {
         res.status(400).send(error.message);
@@ -23,8 +23,9 @@ const getOrderByService = async (req, res, next) => {
 
 const getOrderByPatient = async (req, res, next) => {
     try {
-        const Id_P = req.params.id;
-        const orders_P = await orderData.getOrderByPatient(Id_P);
+        const nomPrenom = req.params.nomPrenom;
+        var tab = nomPrenom.toString().split(" ");
+        const orders_P = await orderData.getOrderByPatient(tab[0], tab[1]);
         res.send(orders_P);
     } catch (error) {
         res.status(400).send(error.message);

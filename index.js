@@ -26,7 +26,7 @@ app.use(
         path: [
             { url: "/users/login", methods: ["POST"] },
             { url: "/users/register", methods: ["POST"] },
-            { url: "/api/orders_S/:id", methods: ["GET"] },
+            { url: "/api/orders_S/:libelle", methods: ["GET"] },
             { url: "/api/orders", methods: ["GET"] },
             { url: "/api/orders_P/:id", methods: ["GET"] },
             { url: "/api/orders_etat/:etat", methods: ["GET"] },

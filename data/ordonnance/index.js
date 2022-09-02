@@ -15,12 +15,12 @@ const getAllOrders = async () => {
     }
 }
 
-const getOrderByService = async (Id_S) => {
+const getOrderByService = async (libelle) => {
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('ordonnance');
         const list = await pool.request()
-            .input('Id_S', sql.Int, Id_S)
+            .input('libelle', sql.VarChar, libelle)
             .query(sqlQueries.getOrderByService);
         return list.recordset;
     } catch (error) {
@@ -28,12 +28,13 @@ const getOrderByService = async (Id_S) => {
     }
 }
 
-const getOrderByPatient = async (Id_P) => {
+const getOrderByPatient = async (nom, prenom) => {
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('ordonnance');
         const list = await pool.request()
-            .input('Id_P', sql.Int, Id_P)
+            .input('nom', sql.VarChar, nom)
+            .input('prenom', sql.VarChar, prenom)
             .query(sqlQueries.getOrderByPatient);
         return list.recordset;
     } catch (error) {

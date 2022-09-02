@@ -12,7 +12,18 @@ const addPatient = async (req, res, next) => {
     }
 }
 
+const getPatientByOrder = async (req, res, next) => {
+    try {
+        const Id_P = req.params.id;
+        const patient_Order = await patientData.getPatientByOrder(Id_P);
+        res.send(patient_Order);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 
 module.exports = {
-    addPatient
+    addPatient,
+    getPatientByOrder
 }

@@ -20,8 +20,22 @@ const addPatient = async (patient) => {
     }
 }
 
+const getPatientByOrder = async (Id_P) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('patient');
+        const list = await pool.request()
+            .input('Id_P', sql.VarChar(50), Id_P)
+            .query(sqlQueries.getPatientByOrder);
+        return list.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 
 
 module.exports = {
-    addPatient
+    addPatient,
+    getPatientByOrder
 }

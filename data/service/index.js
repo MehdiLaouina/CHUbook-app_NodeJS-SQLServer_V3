@@ -17,8 +17,22 @@ const addService = async (service) => {
     }
 }
 
+const getServiceByOrder = async (Id_S) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('service');
+        const service_order = await pool.request()
+            .input('Id_S', sql.Int, Id_S)
+            .query(sqlQueries.getServiceByOrder);
+        return service_order.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 
 
 module.exports = {
-    addService
+    addService,
+    getServiceByOrder
 }

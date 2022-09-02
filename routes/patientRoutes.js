@@ -4,10 +4,11 @@ const express = require('express');
 const patientControllers = require('../controllers/patientControllers');
 const router = express.Router();
 
-const { addPatient } = patientControllers;
+const { addPatient, getPatientByOrder } = patientControllers;
 
 
 router.post('/patient', addPatient);
+router.get('/patientByOrder/:id', getPatientByOrder);
 
 
 
