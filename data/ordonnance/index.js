@@ -55,6 +55,19 @@ const getOrderByEtat = async (etat) => {
     }
 }
 
+const getOrderById = async (Id) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('ordonnance');
+        const list = await pool.request()
+            .input('Id', sql.Int, Id)
+            .query(sqlQueries.getOrderById);
+        return list.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 const addOrder = async (ordonnance) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -83,5 +96,6 @@ module.exports = {
     getOrderByService,
     getOrderByPatient,
     getOrderByEtat,
+    getOrderById,
     addOrder
 }

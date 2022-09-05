@@ -21,6 +21,16 @@ const getOrderByService = async (req, res, next) => {
     }
 }
 
+const getOrderById = async (req, res, next) => {
+    try {
+        const Id = req.params.id;
+        const order_Id = await orderData.getOrderById(Id);
+        res.send(order_Id);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 const getOrderByPatient = async (req, res, next) => {
     try {
         const nomPrenom = req.params.nomPrenom;
@@ -64,5 +74,6 @@ module.exports = {
     getOrderByService,
     getOrderByPatient,
     getOrderByEtat,
+    getOrderById,
     addOrder
 }
