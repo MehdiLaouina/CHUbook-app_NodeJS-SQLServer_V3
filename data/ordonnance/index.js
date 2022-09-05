@@ -33,8 +33,8 @@ const getOrderByPatient = async (nom, prenom) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('ordonnance');
         const list = await pool.request()
-            .input('nom', sql.VarChar, nom)
-            .input('prenom', sql.VarChar, prenom)
+            .input('input1', sql.VarChar, nom)
+            .input('input2', sql.VarChar, prenom)
             .query(sqlQueries.getOrderByPatient);
         return list.recordset;
     } catch (error) {

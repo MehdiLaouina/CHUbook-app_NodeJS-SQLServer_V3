@@ -24,9 +24,14 @@ const getOrderByService = async (req, res, next) => {
 const getOrderByPatient = async (req, res, next) => {
     try {
         const nomPrenom = req.params.nomPrenom;
-        var tab = nomPrenom.toString().split(" ");
-        const orders_P = await orderData.getOrderByPatient(tab[0], tab[1]);
-        res.send(orders_P);
+        if (nomPrenom.toString().includes(' ')) {
+            var tab = nomPrenom.toString().split(" ");
+            const orders_P = await orderData.getOrderByPatient(tab[0], tab[1]);
+            res.send(orders_P);
+        } else {
+            const orders_P = await orderData.getOrderByPatient(nomPrenom, '');
+            res.send(orders_P);
+        }
     } catch (error) {
         res.status(400).send(error.message);
     }
