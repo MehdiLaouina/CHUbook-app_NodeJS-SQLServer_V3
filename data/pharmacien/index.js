@@ -29,7 +29,7 @@ const checkExistanceQuery = async (pool, { email, password }, callback) => {
             .input('email', sql.VarChar(100), email)
             .query(sqlQueries.checkExistance);
         const bodyEmail = email;
-        if (list.recordset[0].total === 0) {
+        if (list.recordset[0] === undefined) {
             return callback({
                 message: "Invalid Email/Password!",
             });
